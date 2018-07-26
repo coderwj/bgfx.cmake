@@ -81,3 +81,5 @@ if( BGFX_INSTALL )
 		endforeach()
 	endif()
 endif()
+
+add_subdirectory(brtshaderc)
