@@ -6,11 +6,9 @@ include( ../cmake/3rdparty/glsl-optimizer.cmake )
 include( ../cmake/3rdparty/glslang.cmake )
 
 add_library( brtshaderc
+	brtshaderc.h
     brtshaderc.cpp
 )
-
-target_include_directories( brtshaderc PUBLIC ${CMAKE_CURRENT_LIST_DIR} )
-target_compile_definitions( brtshaderc PRIVATE "-D_CRT_SECURE_NO_WARNINGS" )
 
 target_link_libraries( brtshaderc
     bx
@@ -21,5 +19,3 @@ target_link_libraries( brtshaderc
     glsl-optimizer
     glslang
 )
-
-install(FILES brtshaderc.h DESTINATION include/brtshaderc )
