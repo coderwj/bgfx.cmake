@@ -81,7 +81,8 @@ if( UNIX AND NOT APPLE )
 	# target_link_libraries( bgfx PUBLIC ${X11_LIBRARIES} ${OPENGL_LIBRARIES})
 	find_library( OPENGLES3_LIBRARY GLESv3 "OpenGL ES v3.0 library")
 	find_library( EGL_LIBRARY EGL "EGL 1.4 library" )
-	target_link_libraries( bgfx PUBLIC ${OPENGLES3_LIBRARY} ${EGL_LIBRARY})
+	include_directories(${ANDROID_NDK}/sources/android/native_app_glue)
+	target_link_libraries( bgfx PUBLIC ${OPENGLES3_LIBRARY} ${EGL_LIBRARY} native_app_glue ${log-lib})
 endif()
 
 # Exclude mm files if not on OS X

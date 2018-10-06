@@ -61,10 +61,10 @@ endif()
 if( UNIX AND NOT APPLE )
 	# Threads
 	find_package( Threads )
-	target_link_libraries( bx ${CMAKE_THREAD_LIBS_INIT} dl )
+	target_link_libraries( bx ${CMAKE_THREAD_LIBS_INIT} dl ${log-lib})
 
 	# Real time (for clock_gettime)
-	target_link_libraries( bx rt )
+	#target_link_libraries( bx rt )
 elseif(APPLE)
 	find_library( FOUNDATION_LIBRARY Foundation)
 	mark_as_advanced( FOUNDATION_LIBRARY )
