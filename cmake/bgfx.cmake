@@ -72,13 +72,16 @@ if( APPLE )
 endif()
 
 if( UNIX AND NOT APPLE )
-	find_package(X11 REQUIRED)
-	find_package(OpenGL REQUIRED)
+	# find_package(X11 REQUIRED)
+	# find_package(OpenGL REQUIRED)
 	#The following commented libraries are linked by bx
-	#find_package(Threads REQUIRED)
-	#find_library(LIBRT_LIBRARIES rt)
-	#find_library(LIBDL_LIBRARIES dl)
-	target_link_libraries( bgfx PUBLIC ${X11_LIBRARIES} ${OPENGL_LIBRARIES})
+	find_package(Threads REQUIRED)
+	find_library(LIBRT_LIBRARIES rt)
+	find_library(LIBDL_LIBRARIES dl)
+	# target_link_libraries( bgfx PUBLIC ${X11_LIBRARIES} ${OPENGL_LIBRARIES})
+	find_library( OPENGLES3_LIBRARY GLESv3 "OpenGL ES v3.0 library")
+	find_library( EGL_LIBRARY EGL "EGL 1.4 library" )
+	target_link_libraries( bgfx PUBLIC ${OPENGLES3_LIBRARY} ${EGL_LIBRARY})
 endif()
 
 # Exclude mm files if not on OS X
