@@ -26,7 +26,7 @@ target_include_directories( bgfx-bounds INTERFACE ${BGFX_DIR}/examples/common )
 
 # Frameworks required on OS X
 if( APPLE )
-	find_library( COCOA_LIBRARY Cocoa )
-	mark_as_advanced( COCOA_LIBRARY )
-	target_link_libraries( bgfx-vertexdecl INTERFACE ${COCOA_LIBRARY} )
+	# find_library( COCOA_LIBRARY Cocoa )
+	# mark_as_advanced( COCOA_LIBRARY )
+	# target_link_libraries( bgfx-vertexdecl INTERFACE ${COCOA_LIBRARY} )
 endif()

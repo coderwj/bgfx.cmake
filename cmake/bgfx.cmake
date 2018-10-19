@@ -70,6 +70,20 @@ if( APPLE )
 	# mark_as_advanced( METAL_LIBRARY )
 	# mark_as_advanced( QUARTZCORE_LIBRARY )
 	# target_link_libraries( bgfx PUBLIC ${COCOA_LIBRARY} ${METAL_LIBRARY} ${QUARTZCORE_LIBRARY} )
+
+	FIND_LIBRARY(OPENGLES_LIBRARY OpenGLES)
+	message("--------find OPENGL_LIBRARY--->" ${OPENGLES_LIBRARY})
+
+	# FIND_LIBRARY(IOKIT_LIBRARY IOKit)
+	# message("--------find IOKIT_LIBRARY--->" ${IOKIT_LIBRARY})
+
+	find_library( METAL_LIBRARY Metal )
+	message("--------find METAL_LIBRARY--->" ${METAL_LIBRARY})
+
+	find_library( QUARTZCORE_LIBRARY QuartzCore )
+	message("--------find QUARTZCORE_LIBRARY--->" ${QUARTZCORE_LIBRARY})
+
+	target_link_libraries( bgfx PUBLIC ${OPENGLES_LIBRARY} ${METAL_LIBRARY} ${QUARTZCORE_LIBRARY})
 endif()
 
 if( UNIX AND NOT APPLE )
