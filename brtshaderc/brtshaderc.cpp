@@ -215,7 +215,7 @@ namespace shaderc
         // include current dir
         std::string dir;
         {
-            const char* base = bgfx::baseName(filePath);
+            const char* base = bgfx::baseName(filePath).getPtr();
 
             if (base != filePath)
             {
@@ -228,8 +228,8 @@ namespace shaderc
         while (NULL != defines
         &&    '\0'  != *defines)
         {
-            defines = bx::strws(defines);
-            const char* eol = bx::strFind(defines, ';');
+            //defines = bx::strws(defines);
+            const char* eol = bx::strFind(defines, ';').getPtr();
             if (NULL == eol)
             {
                 eol = defines + bx::strLen(defines);
@@ -243,7 +243,8 @@ namespace shaderc
         // set varyingdef
         std::string defaultVarying = dir + "varying.def.sc";
         const char* varyingdef = varyingPath ? varyingPath : defaultVarying.c_str();
-        bgfx::File attribdef(varyingdef);
+        bgfx::File attribdef;
+        attribdef.load(bx::FilePath(varyingdef));
         const char* parse = attribdef.getData();
         if (NULL != parse
         &&  *parse != '\0')
@@ -318,7 +319,7 @@ namespace shaderc
         bx::FilePath fp(_filePath);
         char tmp[bx::kMaxFilePath];
         bx::strCopy(tmp, BX_COUNTOF(tmp), fp.getFileName() );
-        const char* base = bx::strFind(_filePath, tmp);
+        const char* base = bx::strFind(_filePath, tmp).getPtr();
         return base;
     }
 
@@ -461,8 +462,8 @@ namespace shaderc
         while (NULL != defines
         &&    '\0'  != *defines)
         {
-            defines = bx::strws(defines);
-            const char* eol = bx::strFind(defines, ';');
+            //defines = bx::strws(defines);
+            const char* eol = bx::strFind(defines, ';').getPtr();
             if (NULL == eol)
             {
                 eol = defines + bx::strLen(defines);
@@ -483,7 +484,8 @@ namespace shaderc
         {
             std::string defaultVarying = dir + "varying.def.sc";
             const char* varyingdef = cmdLine.findOption("varyingdef", defaultVarying.c_str() );
-            bgfx::File attribdef(varyingdef);
+            bgfx::File attribdef;
+            attribdef.load(bx::FilePath(varyingdef));
             const char* parse = attribdef.getData();
             if (NULL != parse
             &&  *parse != '\0')
