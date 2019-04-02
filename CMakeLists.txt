@@ -13,7 +13,7 @@ project( bgfx )
 
 set_property( GLOBAL PROPERTY USE_FOLDERS ON )
 if( APPLE )
-	set( CMAKE_CXX_FLAGS "-ObjC++ --std=c++14" )
+	set( CMAKE_CXX_FLAGS "--std=c++14" )
 elseif(UNIX)
     set(CMAKE_CXX_STANDARD 11)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
