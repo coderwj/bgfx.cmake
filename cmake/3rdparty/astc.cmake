@@ -8,12 +8,12 @@
 # You should have received a copy of the CC0 Public Domain Dedication along with
 # this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-if( TARGET pvrtc )
+if( TARGET astc )
 	return()
 endif()
 
-file( GLOB PVRTC_SOURCES ${BIMG_DIR}/3rdparty/pvrtc/*.cpp ${BIMG_DIR}/3rdparty/pvrtc/*.h )
+file( GLOB ASTC_SOURCES ${BIMG_DIR}/3rdparty/astc/*.cpp ${BIMG_DIR}/3rdparty/astc/*.h )
 
-add_library( pvrtc STATIC ${PVRTC_SOURCES} )
-target_include_directories( pvrtc PUBLIC ${BIMG_DIR}/3rdparty )
-set_target_properties( pvrtc PROPERTIES FOLDER "bgfx/3rdparty" )
+add_library( astc STATIC ${ASTC_SOURCES} )
+target_include_directories( astc PUBLIC ${BIMG_DIR}/3rdparty )
+set_target_properties( astc PROPERTIES FOLDER "bgfx/3rdparty" )

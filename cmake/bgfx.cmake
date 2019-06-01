@@ -43,6 +43,10 @@ if(BGFX_CONFIG_DEBUG)
 	target_compile_definitions( bgfx PRIVATE BGFX_CONFIG_DEBUG=1)
 endif()
 
+if( NOT ${BGFX_OPENGL_VERSION} STREQUAL "" )
+	target_compile_definitions( bgfx PRIVATE BGFX_CONFIG_RENDERER_OPENGL=${BGFX_OPENGL_VERSION})
+endif()
+
 # Special Visual Studio Flags
 if( MSVC )
 	target_compile_definitions( bgfx PRIVATE "_CRT_SECURE_NO_WARNINGS" )
@@ -116,4 +120,6 @@ endif()
 set_target_properties( bgfx PROPERTIES FOLDER "bgfx" )
 
 # Export debug build as "bgfxd"
-set_target_properties( bgfx PROPERTIES OUTPUT_NAME_DEBUG "bgfxd" )
+if( BGFX_USE_DEBUG_SUFFIX )
+	set_target_properties( bgfx PROPERTIES OUTPUT_NAME_DEBUG "bgfxd" )
+endif()

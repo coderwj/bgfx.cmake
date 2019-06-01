@@ -9,6 +9,8 @@
 # this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
 # Third party libs
+include( cmake/3rdparty/astc-codec.cmake )
+include( cmake/3rdparty/astc.cmake )
 include( cmake/3rdparty/edtaa3.cmake )
 include( cmake/3rdparty/etc1.cmake )
 include( cmake/3rdparty/etc2.cmake )
@@ -33,10 +35,12 @@ add_library( bimg STATIC ${BIMG_SOURCES} )
 target_include_directories( bimg PUBLIC ${BIMG_DIR}/include )
 
 # bimg dependencies
-target_link_libraries( bimg bx edtaa3 etc1 etc2 iqa squish nvtt pvrtc )
+target_link_libraries( bimg bx astc-codec astc edtaa3 etc1 etc2 iqa squish nvtt pvrtc )
 
 # Put in a "bgfx" folder in Visual Studio
 set_target_properties( bimg PROPERTIES FOLDER "bgfx" )
 
 # Export debug build as "bimgd"
-set_target_properties( bimg PROPERTIES OUTPUT_NAME_DEBUG "bimgd" )
+if( BGFX_USE_DEBUG_SUFFIX )
+	set_target_properties( bimg PROPERTIES OUTPUT_NAME_DEBUG "bimgd" )
+endif()
