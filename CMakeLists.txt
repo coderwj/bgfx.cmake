@@ -17,9 +17,9 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if( APPLE AND NOT IOS )
-	set( CMAKE_CXX_FLAGS "-ObjC++" )
-endif()
+# if( APPLE AND NOT IOS )
+#     set( CMAKE_CXX_FLAGS "-ObjC++" )
+# endif()
 
 
 option( BGFX_BUILD_TOOLS      "Build bgfx tools."                             OFF  )
@@ -35,23 +35,23 @@ option( BGFX_USE_DEBUG_SUFFIX "Add 'd' suffix to debug output targets"        OF
 set( BGFX_OPENGL_VERSION  "" CACHE STRING "Specify minimum opengl version" )
 
 if( NOT BX_DIR )
-	set( BX_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bx" CACHE STRING "Location of bx." )
+    set( BX_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bx" CACHE STRING "Location of bx." )
 elseif( NOT IS_ABSOLUTE "${BX_DIR}")
-	get_filename_component(BX_DIR "${BX_DIR}" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+    get_filename_component(BX_DIR "${BX_DIR}" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 endif()
 if( NOT BIMG_DIR )
-	set( BIMG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bimg" CACHE STRING "Location of bimg." )
+    set( BIMG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bimg" CACHE STRING "Location of bimg." )
 elseif( NOT IS_ABSOLUTE "${BIMG_DIR}")
-	get_filename_component(BIMG_DIR "${BIMG_DIR}" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+    get_filename_component(BIMG_DIR "${BIMG_DIR}" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 endif()
 if( NOT BGFX_DIR )
-	set( BGFX_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bgfx" CACHE STRING "Location of bgfx." )
+    set( BGFX_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bgfx" CACHE STRING "Location of bgfx." )
 elseif( NOT IS_ABSOLUTE "${BGFX_DIR}")
-	get_filename_component(BGFX_DIR "${BGFX_DIR}" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+    get_filename_component(BGFX_DIR "${BGFX_DIR}" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 endif()
 
 if( BGFX_USE_OVR )
-	include( cmake/ovr.cmake )
+    include( cmake/ovr.cmake )
 endif()
 
 include( cmake/shared.cmake )
@@ -60,37 +60,37 @@ include( cmake/bimg.cmake )
 include( cmake/bgfx.cmake )
 
 if( BGFX_BUILD_TOOLS )
-	include( cmake/tools.cmake )
+    include( cmake/tools.cmake )
 endif()
 
 include( cmake/examples.cmake )
 
 if( BGFX_INSTALL )
-	# install bx
-	install( TARGETS bx DESTINATION lib )
-	install( DIRECTORY ${BX_DIR}/include DESTINATION . )
+    # install bx
+    install( TARGETS bx DESTINATION lib )
+    install( DIRECTORY ${BX_DIR}/include DESTINATION . )
 
-	# install bimg
-	install( TARGETS bimg DESTINATION lib )
-	install( DIRECTORY ${BIMG_DIR}/include DESTINATION . )
+    # install bimg
+    install( TARGETS bimg DESTINATION lib )
+    install( DIRECTORY ${BIMG_DIR}/include DESTINATION . )
 
-	# install bgfx
-	install( TARGETS bgfx DESTINATION lib )
-	install( DIRECTORY ${BGFX_DIR}/include DESTINATION . )
+    # install bgfx
+    install( TARGETS bgfx DESTINATION lib )
+    install( DIRECTORY ${BGFX_DIR}/include DESTINATION . )
 
-	# install tools
-	if( BGFX_BUILD_TOOLS )
+    # install tools
+    if( BGFX_BUILD_TOOLS )
         install( TARGETS shaderc DESTINATION bin )
-		install( TARGETS geometryc DESTINATION bin )
-	endif()
+        install( TARGETS geometryc DESTINATION bin )
+    endif()
 
-	# install examples
-	if( BGFX_BUILD_EXAMPLES AND BGFX_INSTALL_EXAMPLES )
-		install( DIRECTORY ${BGFX_DIR}/examples/runtime/ DESTINATION examples )
-		foreach( EXAMPLE ${BGFX_EXAMPLES} )
-			install( TARGETS example-${EXAMPLE} DESTINATION examples )
-		endforeach()
-	endif()
+    # install examples
+    if( BGFX_BUILD_EXAMPLES AND BGFX_INSTALL_EXAMPLES )
+        install( DIRECTORY ${BGFX_DIR}/examples/runtime/ DESTINATION examples )
+        foreach( EXAMPLE ${BGFX_EXAMPLES} )
+            install( TARGETS example-${EXAMPLE} DESTINATION examples )
+        endforeach()
+    endif()
 endif()
 
 add_subdirectory(brtshaderc)
