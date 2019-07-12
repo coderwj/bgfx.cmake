@@ -19,3 +19,5 @@ target_link_libraries( brtshaderc
     glsl-optimizer
     glslang
 )
+
+target_include_directories(brtshaderc PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
